@@ -27,8 +27,42 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // 'gatsby-plugin-offline',
+    `gatsby-plugin-typescript`,
+    {
+      resolve: `gatsby-plugin-material-ui`,
+      options: {
+        theme: {
+          typography: {
+            fontFamily: ["Montserrat"],
+          },
+          palette: {
+            primary: {
+              main: "#1DB954",
+            },
+            type: "dark",
+          },
+          overrides: {
+            MuiFilledInput: {
+              styles: {
+                borderBottom: 0,
+                borderRadius: 4,
+              },
+            },
+          },
+        },
+      },
+    },
+    {
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
+          {
+            family: `Montserrat`,
+            variants: [`400`, `700`],
+          },
+        ],
+      },
+    },
+    "gatsby-plugin-offline",
   ],
 }
