@@ -3,6 +3,7 @@ import { navigateTo } from "gatsby-link"
 
 const AUTH0_DOMAIN = process.env["GATSBY_AUTH0_DOMAIN"]
 const AUTH0_CLIENT_ID = process.env["GATSBY_AUTH0_CLIENT_ID"]
+const AUTH0_REDIRECT_URI = process.env["GATSBY_AUTH0_REDIRECT_URI"]
 
 class Auth {
   // `window` is not defined at build time so we need to work around it
@@ -12,7 +13,7 @@ class Auth {
       ? new auth0.WebAuth({
           domain: AUTH0_DOMAIN || "",
           clientID: AUTH0_CLIENT_ID || "",
-          redirectUri: "http://localhost:8000/callback",
+          redirectUri: AUTH0_REDIRECT_URI,
           audience: `https://${AUTH0_DOMAIN}/api/v2/`,
           responseType: "token id_token",
           scope: "openid profile email",

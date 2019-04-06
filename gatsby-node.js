@@ -38,6 +38,9 @@ exports.onCreateWebpackConfig = ({
         GATSBY_AUTH0_CLIENT_ID: JSON.stringify(
           process.env["GATSBY_AUTH0_CLIENT_ID"]
         ),
+        GATSBY_AUTH0_REDIRECT_URI: JSON.stringify(
+          process.env["GATSBY_AUTH0_REDIRECT_URI"]
+        ),
       }),
     ],
   })
