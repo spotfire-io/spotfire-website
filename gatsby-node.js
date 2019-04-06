@@ -4,9 +4,17 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`,
-})
+const fs = require("fs")
+
+const envFilePath = `.env.${process.env.NODE_ENV}`
+
+if (fs.existsSync(envFilePath)) {
+  require("dotenv").config({
+    path: envFilePath,
+  })
+} else {
+  console.warn(`Ignoring envfile path '${envFilePath}' as it doesn't exist`)
+}
 
 exports.onCreateWebpackConfig = ({
   stage,
