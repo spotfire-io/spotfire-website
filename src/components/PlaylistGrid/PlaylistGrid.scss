@@ -31,6 +31,13 @@ $playlist-grid-min-height: calc(
     letter-spacing: 0.5px;
   }
 
+  .sp-playlist-grid__key {
+    width: 30px;
+    text-align: center;
+    border-radius: 50px;
+    margin-left: 20px;
+  }
+
   .ReactVirtualized__Table__row {
     border-bottom: 1px solid #292929;
     padding-left: 30px;

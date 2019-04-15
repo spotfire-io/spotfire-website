@@ -3,7 +3,7 @@ const playlistFixture = [
     album: "Blind Melon",
     artist: "Blind Melon",
     duration: "3:37",
-    key: "Am",
+    key: "G",
     title: "No Rain",
   },
   {

@@ -1,17 +1,11 @@
 import React from "react"
-import PropTypes from "prop-types"
 import { orderBy } from "lodash"
-import {
-  AutoSizer,
-  Table,
-  Column,
-  createTableMultiSort,
-  SortIndicator,
-} from "react-virtualized"
+import { AutoSizer, Table, Column, SortIndicator } from "react-virtualized"
 
 // Local Deps
 import "./PlaylistGrid.scss"
 import fixture from "./fixture"
+import keys from "./keyColors"
 
 interface Song {
   album: string
@@ -64,6 +58,19 @@ class PlaylistGrid extends React.Component<Props, State> {
 
   cellRenderer = ({ cellData }) => {
     return <div className="sp-playlist-grid__cell">{cellData}</div>
+  }
+
+  keyCellRenderer = ({ cellData }) => {
+    return (
+      <div className="sp-playlist-grid__cell--key">
+        <div
+          className="sp-playlist-grid__key"
+          style={{ backgroundColor: keys[cellData] }}
+        >
+          {cellData}
+        </div>
+      </div>
+    )
   }
 
   rowGetter = ({ index }) => {
@@ -121,7 +128,7 @@ class PlaylistGrid extends React.Component<Props, State> {
               />
               <Column
                 headerRenderer={this.headerRenderer}
-                cellRenderer={this.cellRenderer}
+                cellRenderer={this.keyCellRenderer}
                 label="Key"
                 dataKey="key"
                 width={width / 5}
