@@ -1,5 +1,8 @@
 import React from "react"
 import { Link } from "gatsby"
+// Local Deps
+import "../styles/globalStyles.scss"
+import playlistFixture from "../components/PlaylistGrid/fixture"
 
 import Layout from "../components/layout"
 import Image from "../components/image"
@@ -16,6 +19,7 @@ import { url } from "inspector"
 
 import LoginButtonWrapper from "../components/LoginButtonWrapper"
 import PlaylistSearch from "../components/PlaylistSearch"
+import PlaylistGrid from "../components/PlaylistGrid/PlaylistGrid"
 
 const styles = {
   heroContainer: {
@@ -52,9 +56,20 @@ const IndexPage = () => (
         </Typography>
       </Grid>
       <Grid item xs={3} />
-      <Grid item xs={6} style={{ textAlign: "center" }}>
+      <Grid
+        container
+        xs={12}
+        direction="row"
+        justify="center"
+        alignItems="center"
+      >
         <LoginButtonWrapper>
-          <PlaylistSearch />
+          <Grid item xs={6}>
+            <PlaylistSearch />
+          </Grid>
+          <Grid item xs={12}>
+            <PlaylistGrid songList={playlistFixture} />
+          </Grid>
         </LoginButtonWrapper>
       </Grid>
     </Grid>

@@ -1,0 +1,25 @@
+@import "./vendor.scss";
+
+body,
+h1,
+h2,
+h3,
+h4,
+div,
+span,
+input,
+label,
+section {
+  font-family: "Montserrat";
+}
+
+body {
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 31%,
+    rgba(37, 37, 37, 1) 83%,
+    rgba(57, 57, 57, 1) 98%
+  );
+  min-height: 100vh;
+}
