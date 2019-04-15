@@ -85,56 +85,60 @@ class PlaylistGrid extends React.Component<Props, State> {
     return (
       <div className="sp-playlist-grid">
         <AutoSizer>
-          {({ width, height }) => (
-            <Table
-              className="sp-playlist-grid__table"
-              height={height}
-              headerHeight={60}
-              sort={this.sort}
-              sortBy={sortBy}
-              sortDirection={sortDirection}
-              rowHeight={45}
-              rowCount={songList.length}
-              rowGetter={this.rowGetter}
-              width={width}
-            >
-              <Column
-                headerRenderer={this.headerRenderer}
-                cellRenderer={this.cellRenderer}
-                label="Title"
-                dataKey="title"
-                width={width / 5}
-              />
-              <Column
-                headerRenderer={this.headerRenderer}
-                cellRenderer={this.cellRenderer}
-                label="Artist"
-                dataKey="artist"
-                width={width / 5}
-              />
-              <Column
-                headerRenderer={this.headerRenderer}
-                cellRenderer={this.cellRenderer}
-                label="Album"
-                dataKey="album"
-                width={width / 5}
-              />
-              <Column
-                headerRenderer={this.headerRenderer}
-                cellRenderer={this.cellRenderer}
-                label="Duration"
-                dataKey="duration"
-                width={width / 5}
-              />
-              <Column
-                headerRenderer={this.headerRenderer}
-                cellRenderer={this.keyCellRenderer}
-                label="Key"
-                dataKey="key"
-                width={width / 5}
-              />
-            </Table>
-          )}
+          {({ width, height }) => {
+            const smallColumnWidth = 200
+            const columnWidth = (width - 100) / 3
+            return (
+              <Table
+                className="sp-playlist-grid__table"
+                height={height}
+                headerHeight={60}
+                sort={this.sort}
+                sortBy={sortBy}
+                sortDirection={sortDirection}
+                rowHeight={45}
+                rowCount={songList.length}
+                rowGetter={this.rowGetter}
+                width={width}
+              >
+                <Column
+                  headerRenderer={this.headerRenderer}
+                  cellRenderer={this.cellRenderer}
+                  label="Title"
+                  dataKey="title"
+                  width={columnWidth}
+                />
+                <Column
+                  headerRenderer={this.headerRenderer}
+                  cellRenderer={this.cellRenderer}
+                  label="Artist"
+                  dataKey="artist"
+                  width={columnWidth}
+                />
+                <Column
+                  headerRenderer={this.headerRenderer}
+                  cellRenderer={this.cellRenderer}
+                  label="Album"
+                  dataKey="album"
+                  width={columnWidth}
+                />
+                <Column
+                  headerRenderer={this.headerRenderer}
+                  cellRenderer={this.cellRenderer}
+                  label="Duration"
+                  dataKey="duration"
+                  width={smallColumnWidth}
+                />
+                <Column
+                  headerRenderer={this.headerRenderer}
+                  cellRenderer={this.keyCellRenderer}
+                  label="Key"
+                  dataKey="key"
+                  width={smallColumnWidth}
+                />
+              </Table>
+            )
+          }}
         </AutoSizer>
       </div>
     )
