@@ -1,14 +1,14 @@
+import { Button } from "@material-ui/core"
 import React, { ReactNode } from "react"
-import { Button, Paper, Grid, Typography } from "@material-ui/core"
 import auth from "../utils/auth"
 
 const styles = {
   loginButton: {
-    color: "#fff",
-    padding: "19px 56px",
     borderRadius: 500,
     boxShadow: "none",
+    color: "#fff",
     fontWeight: 800,
+    padding: "19px 56px",
   },
 }
 
@@ -25,7 +25,7 @@ interface Props {
 export default class LoginButtonWrapper extends React.Component<Props, State> {
   state: State = initialState
 
-  login() {
+  login = () => {
     auth.login()
 
     this.setState({
@@ -33,7 +33,7 @@ export default class LoginButtonWrapper extends React.Component<Props, State> {
     })
   }
 
-  logout() {
+  logout = () => {
     auth.logout()
 
     this.setState({
@@ -56,7 +56,7 @@ export default class LoginButtonWrapper extends React.Component<Props, State> {
             variant="contained"
             color="primary"
             style={styles.loginButton}
-            onClick={this.login.bind(this)}
+            onClick={this.login}
           >
             Login to Spotify
           </Button>
