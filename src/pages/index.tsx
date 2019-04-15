@@ -44,7 +44,7 @@ const styles = {
 }
 
 const initialState = {
-  isLoading: true,
+  isLoading: false,
 }
 
 type State = Readonly<typeof initialState>
