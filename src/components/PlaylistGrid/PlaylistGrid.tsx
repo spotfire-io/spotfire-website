@@ -15,9 +15,7 @@ interface Song {
   title: string
 }
 
-interface Props {
-  songList: Song[]
-}
+interface Props {}
 
 interface State {
   songList: Song[]
@@ -26,10 +24,6 @@ interface State {
 }
 
 class PlaylistGrid extends React.Component<Props, State> {
-  defaultProps = {
-    songList: fixture,
-  }
-
   state = {
     songList: fixture,
     sortBy: "title",
