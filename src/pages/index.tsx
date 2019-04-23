@@ -1,4 +1,5 @@
 import React from "react"
+<<<<<<< HEAD
 import { Link } from "gatsby"
 import { url } from "inspector"
 import {
@@ -9,18 +10,22 @@ import {
   TextField,
   FilledInput,
 } from "@material-ui/core"
+=======
+import { Grid, Typography } from "@material-ui/core"
+>>>>>>> song-table
 // Local Deps
 import "../styles/globalStyles.scss"
 
 import Layout from "../components/layout"
+<<<<<<< HEAD
 import Image from "../components/image"
+=======
+>>>>>>> song-table
 import SEO from "../components/seo"
 import LoginButtonWrapper from "../components/LoginButtonWrapper"
 import PlaylistSearch from "../components/PlaylistSearch"
 import Loading from "../components/Loading/Loading"
 import PlaylistGrid from "../components/PlaylistGrid/PlaylistGrid"
-import playlistFixture from "../components/PlaylistGrid/fixture"
-import { render } from "react-dom"
 
 const styles = {
   heroContainer: {
@@ -31,15 +36,15 @@ const styles = {
     padding: 100,
   },
   loginButton: {
-    color: "#fff",
-    padding: "19px 56px",
     borderRadius: 500,
     boxShadow: "none",
+    color: "#fff",
     fontWeight: 800,
+    padding: "19px 56px",
   },
   spotfireHeading: {
-    fontWeight: 500,
     color: "#fff",
+    fontWeight: 500,
   },
 }
 
@@ -82,7 +87,7 @@ export default class IndexPage extends React.Component<{}, State> {
               {isLoading && <Loading />}
               {!isLoading && (
                 <Grid item xs={12}>
-                  <PlaylistGrid songList={playlistFixture} />
+                  <PlaylistGrid />
                 </Grid>
               )}
             </LoginButtonWrapper>
