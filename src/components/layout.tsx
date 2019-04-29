@@ -11,8 +11,24 @@ import { StaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
 import "./layout.css"
+import auth from "../utils/auth"
+import { createStyles, withStyles, Typography, Link } from "@material-ui/core"
+import classNames from "classnames"
 
-const Layout = ({ children }) => (
+const styles = createStyles({
+  footer: {
+    textAlign: "center",
+  },
+  gqlPlaygroundLink: {
+    color: "white",
+    textDecoration: "inherit",
+    "&:hover": {
+      textDecoration: "white",
+    },
+  },
+})
+
+const Layout = ({ children, classes }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -23,24 +39,35 @@ const Layout = ({ children }) => (
         }
       }
     `}
-    render={data => (
-      <>
-        {/* <Header siteTitle={data.site.siteMetadata.title} /> */}
-        <div>
-          <main>{children}</main>
-          {/* <footer>
-            © {new Date().getFullYear()}, Built with
-            {` `}
-            <a href="https://www.gatsbyjs.org">Gatsby</a>
-          </footer> */}
-        </div>
-      </>
-    )}
+    render={data => {
+      const gqlPlaygroundHref = `${
+        process.env["GATSBY_GRAPHQL_API_ENDPOINT"]
+      }?headers=${JSON.stringify({
+        Authorization: `Bearer ${auth.getAccessToken()}`,
+      })}`
+
+      return (
+        <>
+          <div>
+            <main>{children}</main>
+            <footer className={classNames(classes.footer)}>
+              {auth.isAuthenticated() && (
+                <Link href={gqlPlaygroundHref} variant="body1" target="_blank">
+                  Go to GraphQL Playground
+                </Link>
+              )}
+            </footer>
+          </div>
+        </>
+      )
+    }}
   />
 )
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  classes: PropTypes.object.isRequired,
+  className: PropTypes.string,
 }
 
-export default Layout
+export default withStyles(styles)(Layout)

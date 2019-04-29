@@ -41,6 +41,9 @@ exports.onCreateWebpackConfig = ({
         GATSBY_AUTH0_REDIRECT_URI: JSON.stringify(
           process.env["GATSBY_AUTH0_REDIRECT_URI"]
         ),
+        GATSBY_GRAPHQL_API_ENDPOINT: JSON.stringify(
+          process.env["GATSBY_GRAPHQL_API_ENDPOINT"]
+        ),
       }),
     ],
   })

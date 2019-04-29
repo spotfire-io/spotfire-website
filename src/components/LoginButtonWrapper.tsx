@@ -1,8 +1,14 @@
 import React, { ReactNode } from "react"
-import { Button, Paper, Grid, Typography } from "@material-ui/core"
+import {
+  Button,
+  Paper,
+  Grid,
+  Typography,
+  createStyles,
+} from "@material-ui/core"
 import auth from "../utils/auth"
 
-const styles = {
+const styles = createStyles({
   loginButton: {
     color: "#fff",
     padding: "19px 56px",
@@ -10,7 +16,7 @@ const styles = {
     boxShadow: "none",
     fontWeight: 800,
   },
-}
+})
 
 const initialState = {
   authenticated: false,
