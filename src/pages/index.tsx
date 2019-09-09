@@ -1,28 +1,23 @@
-import React from "react"
-import { Link } from "gatsby"
+import React, { Suspense } from "react";
+import { Router, Redirect } from "@reach/router";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
-import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
-import {
-  Button,
-  Paper,
-  Grid,
-  Typography,
-  TextField,
-  FilledInput,
-} from "@material-ui/core"
-import { url } from "inspector"
+import auth from "../utils/auth";
 
-import LoginButtonWrapper from "../components/LoginButtonWrapper"
-import PlaylistSearch from "../components/PlaylistSearch"
+import Layout from "../components/layout";
+import SEO from "../components/seo";
+import { Grid, Typography } from "@material-ui/core";
+import classnames from "classnames";
+
+import LoginView from "../components/login/LoginView";
+import PlaylistSearchView from "../components/search/PlaylistSearchView";
+import PlaylistDetailView from "../components/detail/PlaylistDetailView";
+import { WithStyles, withStyles } from "@material-ui/styles";
 
 const styles = {
   heroContainer: {
-    // backgroundImage: `url(${require("../images/matt-collamer-565848-unsplash.jpg")})`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "100%",
-    // height: 768,
     padding: 100,
   },
   loginButton: {
@@ -34,31 +29,44 @@ const styles = {
   },
   spotfireHeading: {
     fontWeight: 500,
-    // color: "#333"
   },
-}
+};
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-    <Grid container alignItems="center" style={styles.heroContainer}>
-      <Grid item xs={12} style={{ paddingBottom: 60 }}>
-        <Typography
-          variant="display4"
-          align="center"
-          style={styles.spotfireHeading}
-        >
-          🔥 Spotfire
-        </Typography>
-      </Grid>
-      <Grid item xs={3} />
-      <Grid item xs={6} style={{ textAlign: "center" }}>
-        <LoginButtonWrapper>
-          <PlaylistSearch />
-        </LoginButtonWrapper>
-      </Grid>
-    </Grid>
-  </Layout>
-)
+type Props = WithStyles<typeof styles>;
 
-export default IndexPage
+const IndexPage = ({ classes }: Props) => {
+  return (
+    <Layout>
+      <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
+      <Grid
+        container
+        alignItems="center"
+        className={classnames(classes.heroContainer)}
+      >
+        <Grid item xs={12} style={{ paddingBottom: 60 }}>
+          <Typography
+            variant="h4"
+            align="center"
+            className={classnames(classes.spotfireHeading)}
+          >
+            🔥 Spotfire
+          </Typography>
+        </Grid>
+      </Grid>
+      <Grid container justify="center">
+        <Router>
+          <Redirect
+            default
+            from="/"
+            to={auth.isAuthenticated() ? "/playlists" : "login"}
+          />
+          <LoginView path="/login" />
+          <PlaylistSearchView path="/playlists" />
+          <PlaylistDetailView path="/playlists/:id" />
+        </Router>
+      </Grid>
+    </Layout>
+  );
+};
+
+export default withStyles(styles)(IndexPage);

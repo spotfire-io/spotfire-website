@@ -5,15 +5,14 @@
  * See: https://www.gatsbyjs.org/docs/static-query/
  */
 
-import React from "react"
-import PropTypes from "prop-types"
-import { StaticQuery, graphql } from "gatsby"
+import React from "react";
+import PropTypes from "prop-types";
+import { StaticQuery, graphql } from "gatsby";
 
-import Header from "./header"
-import "./layout.css"
-import auth from "../utils/auth"
-import { createStyles, withStyles, Typography, Link } from "@material-ui/core"
-import classNames from "classnames"
+import "./layout.css";
+import auth from "../utils/auth";
+import { createStyles, withStyles, Typography, Link } from "@material-ui/core";
+import classNames from "classnames";
 
 const styles = createStyles({
   footer: {
@@ -26,7 +25,7 @@ const styles = createStyles({
       textDecoration: "white",
     },
   },
-})
+});
 
 const Layout = ({ children, classes }) => (
   <StaticQuery
@@ -44,7 +43,7 @@ const Layout = ({ children, classes }) => (
         process.env["GATSBY_GRAPHQL_API_ENDPOINT"]
       }?headers=${JSON.stringify({
         Authorization: `Bearer ${auth.getAccessToken()}`,
-      })}`
+      })}`;
 
       return (
         <>
@@ -59,15 +58,15 @@ const Layout = ({ children, classes }) => (
             </footer>
           </div>
         </>
-      )
+      );
     }}
   />
-)
+);
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   classes: PropTypes.object.isRequired,
   className: PropTypes.string,
-}
+};
 
-export default withStyles(styles)(Layout)
+export default withStyles(styles)(Layout);

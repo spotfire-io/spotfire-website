@@ -14,6 +14,10 @@ module.exports = {
       },
     },
     `gatsby-transformer-sharp`,
+    // {
+    //   resolve: `gatsby-plugin-create-client-paths`,
+    //   options: { prefixes: [`/*`] },
+    // },
     `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
@@ -31,27 +35,12 @@ module.exports = {
     {
       resolve: `gatsby-plugin-material-ui`,
       options: {
-        theme: {
-          typography: {
-            fontFamily: ["Montserrat"],
-          },
-          palette: {
-            primary: {
-              main: "#1DB954",
-            },
-            type: "dark",
-          },
-          overrides: {
-            MuiFilledInput: {
-              styles: {
-                borderBottom: 0,
-                borderRadius: 4,
-              },
-            },
-          },
+        stylesProvider: {
+          injectFirst: true,
         },
       },
     },
+    `gatsby-theme-material-ui`,
     {
       resolve: `gatsby-plugin-prefetch-google-fonts`,
       options: {
@@ -65,4 +54,4 @@ module.exports = {
     },
     "gatsby-plugin-offline",
   ],
-}
+};

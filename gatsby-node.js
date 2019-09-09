@@ -4,17 +4,33 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-const fs = require("fs")
+const fs = require("fs");
 
-const envFilePath = `.env.${process.env.NODE_ENV}`
+const envFilePath = `.env.${process.env.NODE_ENV}`;
 
 if (fs.existsSync(envFilePath)) {
   require("dotenv").config({
     path: envFilePath,
-  })
+  });
 } else {
-  console.warn(`Ignoring envfile path '${envFilePath}' as it doesn't exist`)
+  console.warn(`Ignoring envfile path '${envFilePath}' as it doesn't exist`);
 }
+
+exports.onCreatePage = ({ page, actions }) => {
+  const { createPage } = actions;
+
+  switch (page.path) {
+    // Make the front page match everything client side.
+    // Normally your paths should be a bit more judicious.
+    case `/`: {
+      page.matchPath = `/*`;
+    }
+    case `/callback/`: {
+      createPage(page);
+      break;
+    }
+  }
+};
 
 exports.onCreateWebpackConfig = ({
   stage,
@@ -24,12 +40,12 @@ exports.onCreateWebpackConfig = ({
   actions,
   getConfig,
 }) => {
-  const config = getConfig()
+  const config = getConfig();
   if (stage.startsWith("develop") && config.resolve) {
     config.resolve.alias = {
       ...config.resolve.alias,
       "react-dom": "@hot-loader/react-dom",
-    }
+    };
   }
   actions.setWebpackConfig({
     plugins: [
@@ -46,5 +62,5 @@ exports.onCreateWebpackConfig = ({
         ),
       }),
     ],
-  })
-}
+  });
+};
