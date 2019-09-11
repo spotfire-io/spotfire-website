@@ -25,6 +25,7 @@ exports.onCreatePage = ({ page, actions }) => {
     case `/`: {
       page.matchPath = `/*`;
     }
+    case `/404`:
     case `/callback/`: {
       createPage(page);
       break;
