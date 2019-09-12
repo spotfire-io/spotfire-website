@@ -1,0 +1,11 @@
+[[redirects]]
+  from = "/playlists"
+  to = "/"
+
+[[redirects]]
+  from = "/playlists/*"
+  to = "/"
+
+[[redirects]]
+  from = "/login"
+  to = "/"
