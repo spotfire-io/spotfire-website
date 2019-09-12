@@ -23,7 +23,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingTop: "2em",
   },
   gridList: {
-    width: 300 * cols,
+    width: "100%",
+    justifyContent: "center",
   },
 }));
 
@@ -48,7 +49,7 @@ const SearchPlaylistResults = ({ query }: Props) => {
           {data.playlists
             // .filter(p => p.image && p.image.url)
             .map(playlist => (
-              <PlaylistSearchCard playlist={playlist} />
+              <PlaylistSearchCard playlist={playlist} key={playlist.id} />
             ))}
         </GridList>
       </div>

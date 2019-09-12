@@ -5,6 +5,9 @@ const theme = createMuiTheme({
     fontFamily: "Montserrat",
   },
   palette: {
+    background: {
+      default: "#121212",
+    },
     primary: {
       main: "#1DB954",
     },

@@ -6,13 +6,15 @@
   "author": "Cedric Hurst <cedric@spantree.net>",
   "dependencies": {
     "@material-ui/core": "^4.4.1",
+    "@material-ui/icons": "^4.4.1",
     "@material-ui/styles": "^4.4.1",
     "apollo-boost": "^0.4.4",
     "apollo-link-context": "^1.0.19",
     "auth0-js": "^9.10.1",
     "classnames": "^2.2.6",
     "dotenv": "^7.0.0",
-    "gatsby": "^2.15.9",
+    "exenv": "^1.2.2",
+    "gatsby": "page-data-404",
     "gatsby-image": "^2.2.17",
     "gatsby-plugin-manifest": "^2.2.14",
     "gatsby-plugin-material-ui": "^2.1.6",
@@ -27,10 +29,12 @@
     "gatsby-transformer-sharp": "^2.2.13",
     "graphql": "^14.5.4",
     "localstorage-polyfill": "^1.0.1",
+    "node-window-polyfill": "^1.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-apollo": "^3.1.0",
     "react-apollo-hooks": "^0.5.0",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.9.0",
     "react-helmet": "^5.2.1",
     "react-loading": "^2.0.3"
@@ -60,7 +64,7 @@
     "develop": "gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
-    "serve": "gatsby serve",
+    "serve": "gatsby clean && gatsby build && gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
   },
   "repository": {

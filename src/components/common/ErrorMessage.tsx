@@ -4,9 +4,10 @@ import { Theme, SnackbarContent } from "@material-ui/core";
 import React from "react";
 
 const useStyles = makeStyles((theme: Theme) => ({
-  error: {
-    backgroundColor: theme.palette.error.dark,
+  snackbar: {
+    backgroundColor: theme.palette.error.main,
     color: theme.palette.text.primary,
+    marginTop: theme.spacing(5),
   },
 }));
 
@@ -20,7 +21,7 @@ export const ErrorMessage = ({ error, data }: Props) => {
 
   if (error || !data) {
     const message = error ? error.message : "No data loaded";
-    return <SnackbarContent className={classes.error} message={message} />;
+    return <SnackbarContent className={classes.snackbar} message={message} />;
   } else {
     return <></>;
   }

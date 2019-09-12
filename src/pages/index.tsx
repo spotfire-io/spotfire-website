@@ -1,72 +1,69 @@
 import React, { Suspense } from "react";
-import { Router, Redirect } from "@reach/router";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { Router, Redirect, Link, Location } from "@reach/router";
 
 import auth from "../utils/auth";
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-import { Grid, Typography } from "@material-ui/core";
-import classnames from "classnames";
+import { Grid } from "@material-ui/core";
 
 import LoginView from "../components/login/LoginView";
 import PlaylistSearchView from "../components/search/PlaylistSearchView";
 import PlaylistDetailView from "../components/detail/PlaylistDetailView";
-import { WithStyles, withStyles } from "@material-ui/styles";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
-const styles = {
-  heroContainer: {
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "100%",
-    padding: 100,
-  },
-  loginButton: {
-    color: "#fff",
-    padding: "19px 56px",
-    borderRadius: 500,
-    boxShadow: "none",
-    fontWeight: 800,
-  },
-  spotfireHeading: {
-    fontWeight: 500,
-  },
-};
+const FadeTransitionRouter = props => (
+  <Location>
+    {({ location }) => (
+      <TransitionGroup className="transition-group">
+        <CSSTransition key={location.key} classNames="fade" timeout={500}>
+          {/* the only difference between a router animation and
+              any other animation is that you have to pass the
+              location to the router so the old screen renders
+              the "old location" */}
+          <Router location={location} className="router">
+            {props.children}
+          </Router>
+        </CSSTransition>
+      </TransitionGroup>
+    )}
+  </Location>
+);
 
-type Props = WithStyles<typeof styles>;
+const IndexPage = () => {
+  const defaultRedirect = auth.isAuthenticated() ? "/playlists" : "/login";
 
-const IndexPage = ({ classes }: Props) => {
   return (
     <Layout>
       <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-      <Grid
-        container
-        alignItems="center"
-        className={classnames(classes.heroContainer)}
-      >
-        <Grid item xs={12} style={{ paddingBottom: 60 }}>
-          <Typography
-            variant="h4"
-            align="center"
-            className={classnames(classes.spotfireHeading)}
-          >
-            🔥 Spotfire
-          </Typography>
-        </Grid>
-      </Grid>
       <Grid container justify="center">
-        <Router>
-          <Redirect
-            default
-            from="/"
-            to={auth.isAuthenticated() ? "/playlists" : "login"}
-          />
-          <LoginView path="/login" />
-          <PlaylistSearchView path="/playlists" />
-          <PlaylistDetailView path="/playlists/:id" />
-        </Router>
+        <Grid item xs={12} md={8}>
+          <FadeTransitionRouter>
+            <Redirect
+              from="/"
+              to={auth.isAuthenticated() ? "/playlists" : "/login"}
+              replace={true}
+              noThrow
+            />
+            <LoginView path="/login" />
+            <PlaylistSearchView path="/playlists" />
+            <PlaylistDetailView path="/playlists/:id" />
+          </FadeTransitionRouter>
+
+          {/* <Router location>
+            <Redirect
+              from="/"
+              to={auth.isAuthenticated() ? "/playlists" : "/login"}
+              replace={true}
+            />
+            <LoginView path="/login" />
+            <PlaylistSearchView path="/playlists" />
+            <PlaylistDetailView path="/playlists/:id" />
+          </Router> */}
+        </Grid>
       </Grid>
     </Layout>
   );
 };
 
-export default withStyles(styles)(IndexPage);
+export default IndexPage;
