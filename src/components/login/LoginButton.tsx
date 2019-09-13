@@ -1,10 +1,10 @@
 import React, { ReactNode, useState } from "react";
 import { Button, createStyles, WithStyles, Theme } from "@material-ui/core";
 import auth from "../../utils/auth";
-import { withStyles } from "@material-ui/styles";
+import { withStyles, makeStyles } from "@material-ui/styles";
 import classnames from "classnames";
 
-const styles = createStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   loginButton: {
     color: "#fff",
     padding: "19px 56px",
@@ -15,9 +15,9 @@ const styles = createStyles((theme: Theme) => ({
   },
 }));
 
-type Props = WithStyles<typeof styles>;
+export const LoginButton = () => {
+  const classes = useStyles();
 
-const LoginButton = ({ classes }: Props) => {
   const [authenticated, setAuthenticated] = useState(false);
 
   return (
@@ -35,4 +35,4 @@ const LoginButton = ({ classes }: Props) => {
   );
 };
 
-export default withStyles(styles)(LoginButton);
+export default LoginButton;

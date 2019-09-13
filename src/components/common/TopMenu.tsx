@@ -82,8 +82,11 @@ export const TopMenu = (props: Props) => {
         <Toolbar>
           <Icon className={classes.emoji}>🔥</Icon>
           <Typography variant="h6" className={classes.title}>
-            Spotfire
+            <a style={{ textDecoration: "none", color: "white" }} href="/">
+              Spotfire
+            </a>
           </Typography>
+
           <Typography className={classes.userName}>
             {auth.getUserName()}
           </Typography>
@@ -110,7 +113,7 @@ export const TopMenu = (props: Props) => {
             <ReactLink
               href={gqlPlaygroundHref}
               className={classes.link}
-              target="_blank"
+              target="_playground"
             >
               <MenuItem>GraphQL Playground</MenuItem>
             </ReactLink>

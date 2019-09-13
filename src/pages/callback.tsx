@@ -1,7 +1,7 @@
 import React from "react";
 import auth from "../utils/auth";
 import LoadingDialog from "../components/common/LoadingDialog";
-import { createStyles, Grid, Theme } from "@material-ui/core";
+import { Grid, Theme } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme: Theme) => ({

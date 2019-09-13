@@ -6,6 +6,13 @@
 // START Enums and Input Objects
 //==============================================================
 
+export enum OptimizationJobStatus {
+  EXTRACT_UPLOADED = "EXTRACT_UPLOADED",
+  OPTIMIZED = "OPTIMIZED",
+  SAVED = "SAVED",
+  TRACKS_LOADED = "TRACKS_LOADED",
+}
+
 export enum PlaylistSnapshotStatus {
   INITIALIZED = "INITIALIZED",
   LOADED = "LOADED",

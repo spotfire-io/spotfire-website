@@ -1,6 +1,12 @@
 import { RouteComponentProps } from "@reach/router";
 import React, { Suspense } from "react";
-import { Typography, Button, Theme, SnackbarContent } from "@material-ui/core";
+import {
+  Typography,
+  Grid,
+  Theme,
+  SnackbarContent,
+  LinearProgress,
+} from "@material-ui/core";
 import {
   PlaylistDetails,
   PlaylistDetailsVariables,
@@ -45,27 +51,38 @@ const PlaylistDetailView = ({ id }: Props) => {
   } else {
     const { playlist } = data;
     const { latest_snapshot: snapshot } = playlist;
+    const {
+      loaded_tracks: loadedTracks,
+      track_count: totalTracks,
+    } = snapshot!!;
+    const progress = loadedTracks / totalTracks;
     return (
       <>
-        <img
-          src={_.get(
-            playlist,
-            "image.url",
-            "//images.unsplash.com/photo-1494232410401-ad00d5433cfa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&h=300&q=80"
-          )}
-        />
-        <Typography variant="h4">{playlist.name}</Typography>
-        <Typography variant="h6">by {playlist.owner.display_name}</Typography>
-
-        <Typography variant="body2">
-          Loaded Tracks {snapshot!.loaded_tracks}/{snapshot!.track_count}
-        </Typography>
-        <LoadPlaylistTracksStatus
-          playlist={playlist}
-          startPolling={startPolling}
-          stopPolling={stopPolling}
-          refetch={refetch}
-        />
+        <Grid container direction="column" alignItems="center" justify="center">
+          <Grid item xs={12}>
+            <img
+              src={_.get(
+                playlist,
+                "image.url",
+                "//images.unsplash.com/photo-1494232410401-ad00d5433cfa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&h=300&q=80"
+              )}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography align="center" variant="h4">
+              {playlist.name}
+            </Typography>
+            <Typography align="center" variant="h6">
+              by {playlist.owner.display_name}
+            </Typography>
+          </Grid>
+          <LoadPlaylistTracksStatus
+            playlist={playlist}
+            startPolling={startPolling}
+            stopPolling={stopPolling}
+            refetch={refetch}
+          />
+        </Grid>
       </>
     );
   }

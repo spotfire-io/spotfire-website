@@ -40,8 +40,6 @@ interface Props {
 const Layout = ({ children }: Props) => {
   const classes = useStyles();
 
-  const accessToken = auth.getAccessToken();
-
   return (
     <StaticQuery
       query={graphql`

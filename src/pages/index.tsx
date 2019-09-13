@@ -10,6 +10,7 @@ import { Grid } from "@material-ui/core";
 import LoginView from "../components/login/LoginView";
 import PlaylistSearchView from "../components/search/PlaylistSearchView";
 import PlaylistDetailView from "../components/detail/PlaylistDetailView";
+import OptimizationJobView from "../components/job/OptimizationJobView";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 const FadeTransitionRouter = props => (
@@ -48,6 +49,7 @@ const IndexPage = () => {
             <LoginView path="/login" />
             <PlaylistSearchView path="/playlists" />
             <PlaylistDetailView path="/playlists/:id" />
+            <OptimizationJobView path="/jobs/:id" />
           </FadeTransitionRouter>
 
           {/* <Router location>
