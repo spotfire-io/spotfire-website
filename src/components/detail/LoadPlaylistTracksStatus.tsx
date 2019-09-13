@@ -100,7 +100,8 @@ const LoadPlaylistTracksStatus = ({
   if (!snapshot) {
     return <ErrorMessage error={new Error("No snapshot found for playlist")} />;
   }
-  const [status, setStatus] = useState(snapshot.status);
+  // const [status, setStatus] = useState(snapshot.status);
+  const status = snapshot.status;
 
   const [loadTracksMutation] = useLoadTracksMutation(playlist);
   const [optimizeMutation, optimizeJobData] = useStartOptimizationJobMutation(
@@ -129,7 +130,7 @@ const LoadPlaylistTracksStatus = ({
           onClick={e => {
             loadTracksMutation();
             refetch({ upsert: false });
-            setStatus(PlaylistSnapshotStatus.LOADING);
+            // setStatus(PlaylistSnapshotStatus.LOADING);
           }}
         >
           Load {totalTracks} Playlist Tracks
