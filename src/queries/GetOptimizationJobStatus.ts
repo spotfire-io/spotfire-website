@@ -22,6 +22,7 @@ export const GetOptimizationJobStatus = gql`
         playlist {
           id
           href
+          uri
         }
       }
       latest_status_update {

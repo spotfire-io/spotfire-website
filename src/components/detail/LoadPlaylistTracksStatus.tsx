@@ -97,7 +97,10 @@ const LoadPlaylistTracksStatus = ({
 
   const { id, latest_snapshot: snapshot } = playlist;
 
-  const status = snapshot!!.status;
+  if (!snapshot) {
+    return <ErrorMessage error={new Error("No snapshot found for playlist")} />;
+  }
+  const [status, setStatus] = useState(snapshot.status);
 
   const [loadTracksMutation] = useLoadTracksMutation(playlist);
   const [optimizeMutation, optimizeJobData] = useStartOptimizationJobMutation(
@@ -116,7 +119,7 @@ const LoadPlaylistTracksStatus = ({
   const progress = loadedTracks / totalTracks;
 
   switch (status) {
-    case "INITIALIZED": {
+    case PlaylistSnapshotStatus.INITIALIZED: {
       return (
         <Button
           className={classes.button}
@@ -125,7 +128,7 @@ const LoadPlaylistTracksStatus = ({
           onClick={e => {
             loadTracksMutation();
             refetch({ upsert: false });
-            startPolling(500);
+            setStatus(PlaylistSnapshotStatus.LOADING);
           }}
         >
           Load {totalTracks} Playlist Tracks
@@ -133,7 +136,7 @@ const LoadPlaylistTracksStatus = ({
       );
       break;
     }
-    case "LOADING": {
+    case PlaylistSnapshotStatus.LOADING: {
       // return <Typography>LOADING!</Typography>;
       return (
         <>
@@ -154,7 +157,7 @@ const LoadPlaylistTracksStatus = ({
       );
       break;
     }
-    case "LOADED": {
+    case PlaylistSnapshotStatus.LOADED: {
       stopPolling();
       if (optimizeJobData.called == false || optimizeJobData.loading == true) {
         return (

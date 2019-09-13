@@ -26,3 +26,5 @@ export const ErrorMessage = ({ error, data }: Props) => {
     return <></>;
   }
 };
+
+export default ErrorMessage;

@@ -30,6 +30,7 @@ export interface GetOptimizationJobStatus_optimizationJob_new_playlist_snapshot_
   __typename: "Playlist";
   id: string;
   href: string | null;
+  uri: string | null;
 }
 
 export interface GetOptimizationJobStatus_optimizationJob_new_playlist_snapshot {
