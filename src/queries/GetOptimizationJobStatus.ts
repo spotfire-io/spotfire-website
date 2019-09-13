@@ -6,7 +6,18 @@ export const GetOptimizationJobStatus = gql`
       id
       status
       playlist_name
+      original_playlist_snapshot {
+        track_count
+        playlist {
+          image(size: 300) {
+            url
+            width
+            height
+          }
+        }
+      }
       new_playlist_snapshot {
+        track_count
         id
         playlist {
           id

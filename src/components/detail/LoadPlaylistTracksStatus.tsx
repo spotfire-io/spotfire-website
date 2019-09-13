@@ -33,6 +33,7 @@ import { makeStyles } from "@material-ui/styles";
 import { ErrorMessage } from "../common/ErrorMessage";
 import { redirectTo } from "@reach/router";
 import { navigateTo } from "gatsby";
+import LoadingDialog from "../common/LoadingDialog";
 
 const useStyles = makeStyles((theme: Theme) => ({
   button: {
@@ -175,7 +176,10 @@ const LoadPlaylistTracksStatus = ({
       } else {
         const data = _.get(optimizeJobData, "data.startPlaylistOptimization");
         if (data != undefined) {
-          return navigateTo(`/jobs/${data.id}`);
+          navigateTo(`/jobs/${data.id}`);
+          return (
+            <LoadingDialog message="Forwarding You to Your Optimization Job..." />
+          );
         } else {
           const error = new Error(
             "startOptimizationJob mutation returned no data"

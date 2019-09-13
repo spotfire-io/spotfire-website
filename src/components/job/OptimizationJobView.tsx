@@ -58,20 +58,45 @@ export const OptimizationJobView = ({ id }: Props) => {
     const job = data.optimizationJob;
     const status = job.latest_status_update;
     const snapshot = job.new_playlist_snapshot;
+    const originalSnapshot = job.original_playlist_snapshot;
     return (
       <Grid item xs={12}>
-        <Typography>New Playlist Name: {job.playlist_name}</Typography>
-        <Typography>
-          Status: <strong>{job.status}</strong>
-        </Typography>
-        <Typography>
-          Took: <strong>{status.time_millis_spent / 1000}</strong> seconds
-        </Typography>
-        {status && (
+        {job.status == "SAVED" && (
           <>
             <Typography>
-              Best Score: <strong>{status.best_score}</strong>
+              This <strong>{originalSnapshot.track_count}</strong> track
+              playlist has been saved <strong>{job.playlist_name}</strong> under
+              your Spotify account.
             </Typography>
+            {status && (
+              <Typography>
+                Spotfire Solver took{" "}
+                <strong>{status.time_millis_spent / 1000}</strong> seconds and
+                produced a Best Score of <strong>{status.best_score}</strong>.
+              </Typography>
+            )}
+          </>
+        )}
+        {job.status != "SAVED" && status && (
+          <>
+            <Typography>
+              This <strong>{originalSnapshot.track_count}</strong> track
+              playlist will be saved <strong>{job.playlist_name}</strong> under
+              your Spotify account.
+            </Typography>
+            {status && (
+              <Typography>
+                Spotfire Solver has taken{" "}
+                <strong>{status.time_millis_spent / 1000}</strong> seconds so
+                far and current has a Best Score of{" "}
+                <strong>{status.best_score}</strong>.
+              </Typography>
+            )}
+          </>
+        )}
+
+        {status && (
+          <>
             <Table>
               <TableHead>
                 <TableRow>
