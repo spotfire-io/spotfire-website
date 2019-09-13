@@ -78,7 +78,11 @@ const useStartOptimizationJobMutation = (
     StartPlaylistOptimization,
     StartPlaylistOptimizationVariables
   >(startPlaylistOptimizationQuery, {
-    variables: { playlistId: id, snapshotId: snapshot.id },
+    variables: {
+      playlistId: id,
+      snapshotId: snapshot.id,
+      playlistName: `${playlist.name} (Spotfired)`,
+    },
   });
 };
 

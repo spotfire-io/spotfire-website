@@ -9,6 +9,7 @@ import {
   TableCell,
   Button,
   makeStyles,
+  Theme,
 } from "@material-ui/core";
 import React from "react";
 import { useQuery } from "react-apollo";
@@ -60,10 +61,17 @@ export const OptimizationJobView = ({ id }: Props) => {
     return (
       <Grid item xs={12}>
         <Typography>New Playlist Name: {job.playlist_name}</Typography>
-        <Typography>Status: {job.status}</Typography>
+        <Typography>
+          Status: <strong>{job.status}</strong>
+        </Typography>
+        <Typography>
+          Took: <strong>{status.time_millis_spent / 1000}</strong> seconds
+        </Typography>
         {status && (
           <>
-            <Typography>Best Score: {status.best_score}</Typography>
+            <Typography>
+              Best Score: <strong>{status.best_score}</strong>
+            </Typography>
             <Table>
               <TableHead>
                 <TableRow>
