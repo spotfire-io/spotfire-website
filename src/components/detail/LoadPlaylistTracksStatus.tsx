@@ -119,6 +119,7 @@ const LoadPlaylistTracksStatus = ({
   const progress = loadedTracks / totalTracks;
 
   switch (status) {
+    case "INITIALIZED":
     case PlaylistSnapshotStatus.INITIALIZED: {
       return (
         <Button
@@ -136,8 +137,8 @@ const LoadPlaylistTracksStatus = ({
       );
       break;
     }
+    case "LOADING":
     case PlaylistSnapshotStatus.LOADING: {
-      // return <Typography>LOADING!</Typography>;
       return (
         <>
           <Grid item xs={3}></Grid>
@@ -157,6 +158,7 @@ const LoadPlaylistTracksStatus = ({
       );
       break;
     }
+    case "LOADED":
     case PlaylistSnapshotStatus.LOADED: {
       stopPolling();
       if (optimizeJobData.called == false || optimizeJobData.loading == true) {
