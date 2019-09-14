@@ -87,6 +87,8 @@ const useStartOptimizationJobMutation = (
   });
 };
 
+const POLL_INTERVAL = 1000;
+
 const LoadPlaylistTracksStatus = ({
   playlist,
   startPolling,
@@ -100,16 +102,23 @@ const LoadPlaylistTracksStatus = ({
   if (!snapshot) {
     return <ErrorMessage error={new Error("No snapshot found for playlist")} />;
   }
-  // const [status, setStatus] = useState(snapshot.status);
+  const [pending, setPending] = useState(false);
   const status = snapshot.status;
 
-  const [loadTracksMutation] = useLoadTracksMutation(playlist);
+  const [
+    loadTracksMutation,
+    { data, error: loadTracksError, loading },
+  ] = useLoadTracksMutation(playlist);
+
+  if (loadTracksError) {
+    return <ErrorMessage error={loadTracksError} />;
+  }
   const [optimizeMutation, optimizeJobData] = useStartOptimizationJobMutation(
     playlist
   );
 
   if (status == "LOADING") {
-    startPolling(500);
+    startPolling(POLL_INTERVAL);
   }
 
   if (!snapshot) {
@@ -120,8 +129,7 @@ const LoadPlaylistTracksStatus = ({
   const progress = loadedTracks / totalTracks;
 
   switch (status) {
-    case "INITIALIZED":
-    case PlaylistSnapshotStatus.INITIALIZED: {
+    case "INITIALIZED": {
       return (
         <Button
           className={classes.button}
@@ -130,6 +138,8 @@ const LoadPlaylistTracksStatus = ({
           onClick={e => {
             loadTracksMutation();
             refetch({ upsert: false });
+            startPolling(POLL_INTERVAL);
+            setPending(true);
             // setStatus(PlaylistSnapshotStatus.LOADING);
           }}
         >
@@ -138,8 +148,7 @@ const LoadPlaylistTracksStatus = ({
       );
       break;
     }
-    case "LOADING":
-    case PlaylistSnapshotStatus.LOADING: {
+    case "LOADING": {
       return (
         <>
           <Grid item xs={3}></Grid>
@@ -159,10 +168,9 @@ const LoadPlaylistTracksStatus = ({
       );
       break;
     }
-    case "LOADED":
-    case PlaylistSnapshotStatus.LOADED: {
-      stopPolling();
+    case "LOADED": {
       if (optimizeJobData.called == false || optimizeJobData.loading == true) {
+        stopPolling();
         return (
           <>
             <Button

@@ -33,7 +33,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginTop: 15,
     marginBottom: 15,
   },
+  image: {
+    maxWidth: 300,
+  },
 }));
+
+const defaultPhoto =
+  "//images.unsplash.com/photo-1494232410401-ad00d5433cfa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&h=300&q=80";
 
 const PlaylistDetailView = ({ id }: Props) => {
   const classes = useStyles();
@@ -44,28 +50,21 @@ const PlaylistDetailView = ({ id }: Props) => {
   >(playlistDetailsQuery, {
     variables: { id, upsert: true },
   });
-  if (loading) {
+
+  if (loading && !data) {
     return <LoadingDialog message="Loading Playlist Details..." />;
   } else if (error || !data) {
     return <ErrorMessage error={error} data={data} />;
   } else {
     const { playlist } = data;
     const { latest_snapshot: snapshot } = playlist;
-    const {
-      loaded_tracks: loadedTracks,
-      track_count: totalTracks,
-    } = snapshot!!;
-    const progress = loadedTracks / totalTracks;
     return (
       <>
         <Grid container direction="column" alignItems="center" justify="center">
           <Grid item xs={12}>
             <img
-              src={_.get(
-                playlist,
-                "image.url",
-                "//images.unsplash.com/photo-1494232410401-ad00d5433cfa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&h=300&q=80"
-              )}
+              className={classes.image}
+              src={_.get(playlist, "image.url", defaultPhoto)}
             />
           </Grid>
           <Grid item xs={12}>
