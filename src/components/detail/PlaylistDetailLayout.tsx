@@ -21,6 +21,7 @@ import { ErrorMessage } from "../common/ErrorMessage";
 
 interface Props extends RouteComponentProps {
   id?: string;
+  children: ReactNode;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -75,12 +76,7 @@ const PlaylistDetailView = ({ id }: Props) => {
               by {playlist.owner.display_name}
             </Typography>
           </Grid>
-          <LoadPlaylistTracksStatus
-            playlist={playlist}
-            startPolling={startPolling}
-            stopPolling={stopPolling}
-            refetch={refetch}
-          />
+          {children}
         </Grid>
       </>
     );

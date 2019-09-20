@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  Typography,
-  Button,
-  Theme,
-  Grid,
-  LinearProgress,
-} from "@material-ui/core";
+import { Typography, Button, Theme } from "@material-ui/core";
 import _ from "lodash";
 
 import loadPlaylistTracksQuery from "../../queries/LoadPlaylistTracks";
@@ -149,23 +143,6 @@ const LoadPlaylistTracksStatus = ({
       break;
     }
     case "LOADING": {
-      return (
-        <>
-          <Grid item xs={3}></Grid>
-          <Grid item xs={5}>
-            <Typography align="center" variant="body2">
-              <LinearProgress
-                color="primary"
-                variant="determinate"
-                value={progress * 100}
-                style={{ paddingTop: "2em", margin: "2em 0" }}
-              />
-              Loaded <strong>{loadedTracks}</strong> out of{" "}
-              <strong>{totalTracks}</strong> playlist tracks
-            </Typography>
-          </Grid>
-        </>
-      );
       break;
     }
     case "LOADED": {

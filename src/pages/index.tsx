@@ -12,6 +12,7 @@ import PlaylistSearchView from "../components/search/PlaylistSearchView";
 import PlaylistDetailView from "../components/detail/PlaylistDetailView";
 import OptimizationJobView from "../components/job/OptimizationJobView";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { LoadTracksStep } from "../components/detail/LoadTracksStep";
 
 const FadeTransitionRouter = props => (
   <Location>
@@ -49,6 +50,7 @@ const IndexPage = () => {
             <LoginView path="/login" />
             <PlaylistSearchView path="/playlists" />
             <PlaylistDetailView path="/playlists/:id" />
+            <LoadTracksStep path="/playlists/:playlistId/load" />
             <OptimizationJobView path="/jobs/:id" />
           </FadeTransitionRouter>
 
