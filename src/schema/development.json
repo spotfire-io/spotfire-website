@@ -874,6 +874,16 @@
                   "ofType": null
                 },
                 "defaultValue": null
+              },
+              {
+                "name": "limit",
+                "description": "Number of search results returned",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": "50"
               }
             ],
             "type": {

@@ -1,8 +1,8 @@
 import { gql } from "apollo-boost";
 
 export default gql`
-  query PlaylistSearch($query: String) {
-    playlists(query: $query) {
+  query PlaylistSearch($query: String, $limit: Int) {
+    playlists(query: $query, limit: $limit) {
       id
       name
       latest_snapshot_id
@@ -14,6 +14,7 @@ export default gql`
       latest_snapshot {
         id
         status
+        track_count
       }
       owner {
         id

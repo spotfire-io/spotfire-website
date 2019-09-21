@@ -17,6 +17,7 @@ export interface PlaylistSearch_playlists_latest_snapshot {
   __typename: "PlaylistSnapshot";
   id: string;
   status: PlaylistSnapshotStatus;
+  track_count: number;
 }
 
 export interface PlaylistSearch_playlists_owner {
@@ -43,4 +44,5 @@ export interface PlaylistSearch {
 
 export interface PlaylistSearchVariables {
   query?: string | null;
+  limit?: number | null;
 }

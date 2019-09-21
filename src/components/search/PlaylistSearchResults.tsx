@@ -36,7 +36,7 @@ const SearchPlaylistResults = ({ query }: Props) => {
   const { loading, error, data } = useQuery<
     PlaylistSearch,
     PlaylistSearchVariables
-  >(playlistSearchQuery, { variables: { query } });
+  >(playlistSearchQuery, { variables: { query, limit: 48 } });
   const classes = useStyles();
   if (loading) {
     return <LoadingDialog message="Loading Playlist Details..." />;

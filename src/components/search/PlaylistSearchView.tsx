@@ -28,7 +28,7 @@ const PlaylistSearchView = (props: RouteComponentProps) => {
         <FilledInput
           fullWidth
           disableUnderline
-          placeholder="Search for a Playlist or Enter a URL"
+          placeholder="Search for Playlist by Name or Enter a Spotify URL"
           onChange={e => setQuery(e.target.value)}
           classes={{
             root: classes.root,
