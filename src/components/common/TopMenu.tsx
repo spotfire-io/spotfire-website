@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
     },
     appBar: {
-      backgroundColor: theme.palette.background.default,
+      backgroundColor: "inherit",
     },
     emoji: {
       marginRight: theme.spacing(2),
