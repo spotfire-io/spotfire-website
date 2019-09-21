@@ -80,10 +80,10 @@ export const TopMenu = (props: Props) => {
     <div className={classes.root}>
       <AppBar className={classes.appBar} position="static" elevation={0}>
         <Toolbar>
-          <Icon className={classes.emoji}>🔥</Icon>
+          {/* <Icon className={classes.emoji}></Icon> */}
           <Typography variant="h6" className={classes.title}>
             <a style={{ textDecoration: "none", color: "white" }} href="/">
-              Spotfire
+              🔥 Spotfire
             </a>
           </Typography>
 
