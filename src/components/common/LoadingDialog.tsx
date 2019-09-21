@@ -6,6 +6,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   box: {
     width: "100%",
     justifyContent: "center",
+    marginTop: theme.spacing(5),
   },
   centered: {
     margin: "auto",
@@ -16,7 +17,7 @@ interface Props {
   message?: String;
 }
 
-const LoadingDialog = ({ message = "Loading..." }: Props) => {
+export const LoadingDialog = ({ message = "Loading..." }: Props) => {
   const classes = useStyles();
   return (
     <Grid container justify="center" className={classes.box}>
