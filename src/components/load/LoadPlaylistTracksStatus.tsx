@@ -28,10 +28,10 @@ interface StatusViewProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   progressBar: {
-    width: 400,
+    width: 350,
+    alignContent: "center",
     paddingTop: "2em",
     margin: "2em 0",
-    // height: 50,
   },
 }));
 
@@ -44,8 +44,7 @@ export const LoadPlaylistTracksStatus = ({ playlist }: StatusViewProps) => {
     <>
       <PlaylistDetailCard playlist={playlist} />
       <Grid container direction="column" alignItems="center" justify="center">
-        <Grid item xs={1}></Grid>
-        <Grid item xs={8}>
+        <Grid item xs={12}>
           <LinearProgress
             color="primary"
             variant="determinate"
