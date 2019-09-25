@@ -1,16 +1,10 @@
 import React from "react";
 import { Typography, GridList, Theme, Grid } from "@material-ui/core";
-import { useQuery } from "react-apollo";
-
-import playlistSearchQuery from "../../queries/PlaylistSearch";
-import {
-  PlaylistSearch,
-  PlaylistSearchVariables,
-} from "../../queries/types/PlaylistSearch";
+import { usePlaylistSearchQuery } from "../../graphql";
 import { makeStyles } from "@material-ui/styles";
 import PlaylistSearchCard from "./PlaylistSearchCard";
-import LoadingDialog from "../common/LoadingDialog";
-import { ErrorMessage } from "../common/ErrorMessage";
+import { QueryGuard } from "../common/QueryGuard";
+import { client } from "../../utils/apolloClient";
 
 const cols = 3;
 
@@ -33,34 +27,31 @@ interface Props {
 }
 
 const SearchPlaylistResults = ({ query }: Props) => {
-  const { loading, error, data } = useQuery<
-    PlaylistSearch,
-    PlaylistSearchVariables
-  >(playlistSearchQuery, { variables: { query, limit: 48 } });
   const classes = useStyles();
-  if (loading) {
-    return <LoadingDialog message="Loading Playlist Details..." />;
-  } else if (error || !data) {
-    return <ErrorMessage error={error} data={data} />;
-  } else if (data.playlists.length > 0) {
-    return (
-      <div className={classes.root}>
-        <GridList cols={cols} spacing={0} className={classes.gridList}>
-          {data.playlists
-            // .filter(p => p.image && p.image.url)
-            .map(playlist => (
+  const result = usePlaylistSearchQuery({
+    variables: { query, limit: 48 },
+    client,
+  });
+  const { data } = result;
+
+  return (
+    <QueryGuard result={result}>
+      {data && data.playlists.length > 0 ? (
+        <div className={classes.root}>
+          <GridList cols={cols} spacing={0} className={classes.gridList}>
+            {data!.playlists.map(playlist => (
               <PlaylistSearchCard playlist={playlist} key={playlist.id} />
             ))}
-        </GridList>
-      </div>
-    );
-  } else {
-    return (
-      <Grid item xs="auto">
-        No results found
-      </Grid>
-    );
-  }
+          </GridList>
+        </div>
+      ) : (
+        <Grid item xs="auto">
+          No results found
+        </Grid>
+      )}
+      )
+    </QueryGuard>
+  );
 };
 
 export default SearchPlaylistResults;

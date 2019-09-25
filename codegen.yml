@@ -1,0 +1,17 @@
+schema: http://localhost:4001/
+documents: ./src/graphql/*.graphql
+overwrite: true
+generates:
+  ./src/graphql/index.tsx:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+      # - typescript-compatibility
+    config:
+      apolloImportHooksFrom: "@apollo/react-hooks"
+      withHooks: true
+      # globalNamespace: true
+      noNamespaces: true
+      scalars:
+        DateTime: Date

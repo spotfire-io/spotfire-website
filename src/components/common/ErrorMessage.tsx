@@ -19,12 +19,8 @@ interface Props {
 export const ErrorMessage = ({ error, data }: Props) => {
   const classes = useStyles();
 
-  if (error || !data) {
-    const message = error ? error.message : "No data loaded";
-    return <SnackbarContent className={classes.snackbar} message={message} />;
-  } else {
-    return <></>;
-  }
+  const message = error ? error.message : "No data loaded";
+  return <SnackbarContent className={classes.snackbar} message={message} />;
 };
 
 export default ErrorMessage;

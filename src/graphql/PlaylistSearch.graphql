@@ -1,0 +1,20 @@
+query PlaylistSearch($query: String, $limit: Int) {
+  playlists(query: $query, limit: $limit) {
+    id
+    name
+    uri
+    href
+    image(size: 300) {
+      url
+    }
+    latest_snapshot {
+      id
+      status
+      track_count
+    }
+    owner {
+      id
+      display_name
+    }
+  }
+}

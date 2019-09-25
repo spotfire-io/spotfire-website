@@ -8,8 +8,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: "center",
     marginTop: theme.spacing(5),
   },
-  centered: {
+  loading: {
     margin: "auto",
+    marginBottom: theme.spacing(2),
   },
 }));
 
@@ -26,7 +27,8 @@ export const LoadingDialog = ({ message = "Loading..." }: Props) => {
           type="spin"
           color="#fff"
           width={150}
-          className={classes.centered}
+          height={150}
+          className={classes.loading}
         />
       </Grid>
       <Grid item xs={12}>

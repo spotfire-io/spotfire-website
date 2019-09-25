@@ -9,9 +9,15 @@ import {
   GridListTile,
   GridListTileBar,
 } from "@material-ui/core";
-import { PlaylistSearch_playlists } from "../../queries/types/PlaylistSearch";
+import {
+  PlaylistSearchQuery,
+  Playlist,
+  User,
+  PlaylistSnapshot,
+} from "../../graphql";
 import { Link } from "@reach/router";
 import _ from "lodash";
+import Maybe from "graphql/tsutils/Maybe";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -47,7 +53,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-  playlist: PlaylistSearch_playlists;
+  playlist: Pick<Playlist, "id" | "name" | "image"> & {
+    owner: Pick<User, "id" | "display_name">;
+  } & {
+    latest_snapshot: Maybe<Pick<PlaylistSnapshot, "track_count" | "status">>;
+  };
 }
 
 const PlaylistSearchCard = ({ playlist }: Props) => {
