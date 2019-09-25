@@ -50,7 +50,7 @@ export const OptimizationJobView = ({ id }: Props) => {
   const classes = useStyles();
 
   if (loading || !_.get(data, "optimizationJob.latest_status_update")) {
-    return <LoadingDialog message="Initializing Optimization Job..." />;
+    return <LoadingDialog message="Waiting for Optimizer Status..." />;
   } else if (error || !data || !data.optimizationJob) {
     return <ErrorMessage error={error} data={data} />;
   } else {
