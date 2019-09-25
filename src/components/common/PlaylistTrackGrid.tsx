@@ -100,7 +100,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const useScaleStyles = makeStyles((theme: Theme) =>
   _.mapValues(scaleColors, v => ({
     backgroundColor: fade(emphasize(lighten(`#${v}`, 0.6)), 0.9),
-    color: darken(`#${v}`, 0.9),
+    color: fade("#333", 0.2),
   }))
 );
 
