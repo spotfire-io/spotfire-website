@@ -14,8 +14,8 @@ import { client } from "../../utils/apolloClient";
 import { QueryGuard } from "../common/QueryGuard";
 import ErrorMessage from "../common/ErrorMessage";
 import { LoadPlaylistTracksStatus } from "./LoadPlaylistTracksStatus";
-import { navigateTo } from "gatsby";
 import { ActionButton } from "../common/ActionButton";
+import { navigate } from "gatsby";
 
 const useStyles = makeStyles((theme: Theme) => {});
 
@@ -72,7 +72,7 @@ export const LoadPlaylistTracksView = ({ id, autoAdvance }: Props) => {
 
   if (startOptimizationResult.data) {
     const jobData = startOptimizationResult.data;
-    navigateTo(`/jobs/${jobData.startPlaylistOptimization.id}`);
+    navigate(`/jobs/${jobData.startPlaylistOptimization.id}`);
   }
 
   return (
