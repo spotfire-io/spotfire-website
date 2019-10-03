@@ -1,5 +1,5 @@
 import auth0 from "auth0-js";
-import { navigate, Location } from "@reach/router";
+import { navigateTo } from "gatsby-link";
 
 if (typeof localStorage === "undefined" || localStorage === null) {
   require("localstorage-polyfill");
@@ -43,7 +43,7 @@ class Auth {
         if (authResult && authResult.accessToken && authResult.idToken) {
           this.setSession(authResult);
         } else if (err) {
-          navigate("/");
+          navigateTo("/");
           console.log(err);
           alert(`Error: ${err.error}. Check the console for further details.`);
         }
@@ -101,7 +101,7 @@ class Auth {
           this.setUserProfile(profile);
         }
         // navigateTo to the home route
-        navigate("/");
+        navigateTo("/");
       });
     }
   }
@@ -115,11 +115,9 @@ class Auth {
 
     // Remove isLoggedIn flag from localStorage
     localStorage.removeItem("isLoggedIn");
-    if (this.auth0 && typeof window != "undefined") {
-      this.auth0.logout({
-        returnTo: `${window.location.protocol}//${window.location.host}/login`,
-      });
-    }
+
+    // navigateTo to the home route
+    navigateTo("/");
   }
 
   isAuthenticated() {
