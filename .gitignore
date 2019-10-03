@@ -54,7 +54,8 @@ typings/
 # dotenv environment variables file
 .env
 .env.*
-!env.*.enc
+!.env.*.enc
+
 
 # gatsby files
 .cache/
