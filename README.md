@@ -1,3 +1,5 @@
+# Spotfire Website
+
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <p align="center">
   <a href="https://www.gatsbyjs.org">
@@ -10,10 +12,10 @@
 
 This is the application code for the public-facing Spotfire.io website. It uses Gatsby, React, TypeScript and Apollo.
 
-#Requirements
+## Requirements
 `spotfire-api` running locally. Refer to the [API's repo](https://github.com/spotfire-io/spotfire-api) for instructions.
 
-#Setup
+## Setup
 1. `asdf install` will install node and the tool for decrypting the required credentials.
 2. `make dotenv-decrypt`
 3. `yarn install`
@@ -24,5 +26,6 @@ This is the application code for the public-facing Spotfire.io website. It uses 
 6. `yarn start` to start the API in your local machine or  `yarn dev` to get real time compilation after every change to the source.
 
 
-#Deployment
+## Deployment
+
 The website gets deployed to `Netlify` after every push to `master`.  
