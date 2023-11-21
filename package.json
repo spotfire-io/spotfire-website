@@ -17,6 +17,7 @@
     "exenv": "^1.2.2",
     "gatsby": "page-data-404",
     "gatsby-image": "^2.2.17",
+    "gatsby-plugin-google-fonts-v2": "^1.0.1",
     "gatsby-plugin-manifest": "^2.2.14",
     "gatsby-plugin-material-ui": "^2.1.6",
     "gatsby-plugin-offline": "^2.0.25",
